@@ -87,19 +87,45 @@ var upperCasedCharacters = [
   'Y',
   'Z'
 ];
-document.getElementById('generate').addEventListener('click', function() {
-  alert(generatePassword());
-});
+var inputs = [""]
+var choice = [];
 
 let passInfo = "";
-let characterAmount = window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters");
+let characterAmount = window.prompt("Enter the amount of characters you want for your password. NOTE: Must be between 8-128 characters"); 
+
+  if(isNaN(characterAmount) || characterAmount <  8 || characterAmount > 128) {
+     alert("Character amount has to be 8 - 128. Try again");
+     
+     
+}
+
 // Function to prompt user for password options
 function getPasswordOptions() {
-
+  
+let specialChoice  
+var specialCharacters = confirm("Include special character letters?");
+if (specialChoice === true) {
+    for (var i = 0; i < specialCharacters.length; i++) {
+      inputs.push(specialCharacters[i]);
+    }
+    return
+  }
+    
+}
+if (confirm("Include numeric character letters?")) {
+    choice = choice.concat(numericCharacters);
+}
+if (confirm("Include lower cased character letters?")) {
+    choice = choice.concat(lowerCasedCharacters);
+}
+if (confirm("Include upper cased character letters?")) {
+  choice = choice.concat(upperCasedCharacters);
 }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
+    let randomPassword = "";
+    passwordText.value = password;
 
 }
 
@@ -111,6 +137,9 @@ function generatePassword() {
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
+// Add event listener to generate button
+generateBtn.addEventListener('click', writePassword);
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
@@ -118,6 +147,3 @@ function writePassword() {
 
   passwordText.value = password;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
